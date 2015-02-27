@@ -10,7 +10,7 @@ import br.com.floripark.financeiro.view.cadastro.CadastroTipoLancamento;
 import br.com.floripark.financeiro.view.cadastro.CadastroUsuario;
 import br.com.floripark.financeiro.view.cadastro.IncluirRetornoBancario;
 import br.com.floripark.financeiro.view.consulta.ConsultaBanco;
-import br.com.floripark.financeiro.view.consulta.ConsultaComprovante;
+import br.com.floripark.financeiro.view.consulta.ConsultaRetorno;
 import br.com.floripark.financeiro.view.consulta.ConsultaEmpresa;
 import br.com.floripark.financeiro.view.consulta.ConsultaGrupoCpa;
 import br.com.floripark.financeiro.view.consulta.ConsultaServico;
@@ -295,7 +295,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void mnComprovanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnComprovanteActionPerformed
-        ConsultaComprovante consultaComprovante = new ConsultaComprovante(this, true, ul);
+        ConsultaRetorno consultaComprovante = new ConsultaRetorno(this, true, ul);
         consultaComprovante.setLocationRelativeTo(this);
         consultaComprovante.setVisible(true);
     }//GEN-LAST:event_mnComprovanteActionPerformed
