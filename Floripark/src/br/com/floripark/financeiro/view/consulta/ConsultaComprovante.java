@@ -1,7 +1,10 @@
 package br.com.floripark.financeiro.view.consulta;
 
 import br.com.floripark.financeiro.model.Usuario;
+import br.com.floripark.financeiro.util.combobox.BancoComboModel;
 import br.com.floripark.financeiro.util.combobox.EmpresaComboModel;
+import br.com.floripark.financeiro.util.combobox.ServicoComboModel;
+import javax.swing.ComboBoxModel;
 
 public class ConsultaComprovante extends javax.swing.JDialog {
 
@@ -40,6 +43,8 @@ public class ConsultaComprovante extends javax.swing.JDialog {
 
         jLabel2.setText("Banco:");
 
+        cbBanco.setModel(new BancoComboModel());
+
         jtRetorno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -58,6 +63,8 @@ public class ConsultaComprovante extends javax.swing.JDialog {
                 btnSairActionPerformed(evt);
             }
         });
+
+        jComboBox1.setModel(new ServicoComboModel());
 
         jLabel4.setText("Serviço:");
 
@@ -181,4 +188,8 @@ public class ConsultaComprovante extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable jtRetorno;
     // End of variables declaration//GEN-END:variables
+
+    private ComboBoxModel ServicoComboModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

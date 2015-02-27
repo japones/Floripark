@@ -108,4 +108,8 @@ public class Banco implements Serializable {
         this.movimentoCollection = movimentoCollection;
     }
 
+    @Override
+    public String toString() {
+        return getNome();
+    }
 }
