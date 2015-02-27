@@ -1,10 +1,15 @@
 package br.com.floripark.financeiro.view.consulta;
 
+import br.com.floripark.financeiro.model.RetornoBancario;
 import br.com.floripark.financeiro.model.Usuario;
 import br.com.floripark.financeiro.util.combobox.BancoComboModel;
 import br.com.floripark.financeiro.util.combobox.EmpresaComboModel;
 import br.com.floripark.financeiro.util.combobox.ServicoComboModel;
+import br.com.floripark.financeiro.util.tablemodel.RetornoTableModel;
 import javax.swing.ComboBoxModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class ConsultaComprovante extends javax.swing.JDialog {
 
@@ -12,6 +17,33 @@ public class ConsultaComprovante extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         Usuario usuarioLogado = usuario;
+        // Lógica para manipular uma linha do JTable quando esta é selecionada    
+        ListSelectionModel linhaModeloSelecao = jtRetorno.getSelectionModel();
+        linhaModeloSelecao.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Ignora o evento enquanto os valores da linha selecionada
+                // estão sendo atualizados
+                if (e.getValueIsAdjusting()) {
+                    return;
+                }
+                // Verifica se existe uma linha selecionada. O
+                // valor deve ser maior ou igual a 0, que é o número da linha
+                if (jtRetorno.getSelectedRow() >= 0) {
+                    Integer linhaSelecionada = jtRetorno.getSelectedRow();
+                    RetornoBancario retornoBancario = ((RetornoTableModel) jtRetorno.getModel()).getRetornoBancario().get(linhaSelecionada);
+                    if (retornoBancario != null) {
+                        
+                        
+                        
+                        CadastroEmpresa cadastroEmpresa = new CadastroEmpresa(null, true, ul, retornoBancario);
+                        cadastroEmpresa.setLocationRelativeTo(jScrollPane1.getParent());
+                        cadastroEmpresa.setVisible(true);
+                        jtRetorno.setModel(new EmpresaTableModel());
+                    }
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")

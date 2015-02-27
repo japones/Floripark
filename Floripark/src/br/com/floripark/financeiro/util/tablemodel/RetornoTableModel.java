@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
 public class RetornoTableModel extends AbstractTableModel {
 
     private List<RetornoBancario> retornos;
-    private String[] cabecalhoColunas = {"Tipo Pagto", "Data"};
+    private String[] cabecalhoColunas = {"Empresa", "Banco", "Servico", "Data Pagamento"};
     
     public RetornoTableModel() {
         try {
@@ -34,9 +34,13 @@ public class RetornoTableModel extends AbstractTableModel {
     public Object getValueAt(int numLinha, int numColuna) {
         switch (numColuna) {
             case 0:
-                return retornos.get(numLinha).getServico().getDescricao();
+                return retornos.get(numLinha).getEmpresa().getNome();
             case 1:
-                return retornos.get(numLinha).getDatapagamento();
+                return retornos.get(numLinha).getBanco().getNome();
+            case 2:
+                return retornos.get(numLinha).getServico().getDescricao();
+            case 3:
+                return retornos.get(numLinha).getDatapagamento().toString();
         }
         return null;
     }
