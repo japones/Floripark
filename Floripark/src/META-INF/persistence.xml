@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="DEFAULT_PU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>br.com.floripark.financeiro.model.GrupoCpa</class>
+    <class>br.com.floripark.financeiro.model.Movimento</class>
+    <class>br.com.floripark.financeiro.model.Empresa</class>
+    <class>br.com.floripark.financeiro.model.DataMovimento</class>
+    <class>br.com.floripark.financeiro.model.TipoLancamento</class>
+    <class>br.com.floripark.financeiro.model.Banco</class>
+    <class>br.com.floripark.financeiro.model.Usuario</class>
+    <class>GrupoCpa</class>
+    <class>Empresa</class>
+    <class>Usuario</class>
+    <class>Banco</class>
+    <class>Movimento</class>
+    <class>TipoLancamento</class>
+    <class>DataMovimento</class>
+    <class>br.com.floripark.financeiro.model.Dado</class>
+    <class>br.com.floripark.financeiro.model.RetornoBancario</class>
+    <class>br.com.floripark.financeiro.model.Servico</class>
+    <class>Servico</class>
+    <class>br.com.floripark.financeiro.model.Temporario</class>
+    <class>Temporario</class>
+    <class>Dado</class>
+    <class>RetornoBancario</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://192.168.1.251\floripark:1433;databaseName=floripark"/>
+      <property name="javax.persistence.jdbc.user" value="floripark"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.password" value="flk2014#"/>
+    </properties>
+  </persistence-unit>
+</persistence>
