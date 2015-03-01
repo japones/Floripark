@@ -2,6 +2,7 @@ package br.com.floripark.financeiro.dao.impl;
 
 import br.com.floripark.financeiro.dao.IDadoDao;
 import br.com.floripark.financeiro.model.Dado;
+import br.com.floripark.financeiro.model.RetornoBancario;
 import br.com.floripark.financeiro.util.EntityManagerUtil;
 import static br.com.floripark.financeiro.util.EntityManagerUtil.getEntityManager;
 import java.util.ArrayList;
@@ -74,9 +75,10 @@ public class DadoDao implements IDadoDao {
     }
 
     @Override
-    public ArrayList<Dado> pesquisarDado() throws Exception {
+    public ArrayList<Dado> pesquisarDado(RetornoBancario retorno) throws Exception {
         ArrayList<Dado> lista;
-        Query query = entityManager.createQuery("select x from Dado x ");
+        Query query = entityManager.createQuery("SELECT x FROM Dado x WHERE x.retorno = :x ");
+        query.setParameter("x", retorno);
         lista = (ArrayList<Dado>) query.getResultList();
         return lista;
     }

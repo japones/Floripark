@@ -16,6 +16,6 @@ public interface IDadoService {
 
     public Dado pesquisarDado(Integer id) throws Exception;
 
-    public ArrayList<Dado> pesquisarDado() throws Exception;
+    public ArrayList<Dado> pesquisarDado(RetornoBancario retorno) throws Exception;
 
 }

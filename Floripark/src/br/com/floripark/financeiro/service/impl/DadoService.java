@@ -30,7 +30,8 @@ public class DadoService implements IDadoService{
     }
 
     @Override
-    public ArrayList<Dado> pesquisarDado() throws Exception {
+    public ArrayList<Dado> pesquisarDado(RetornoBancario retorno) throws Exception {
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

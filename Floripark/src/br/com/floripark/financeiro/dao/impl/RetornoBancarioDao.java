@@ -1,7 +1,10 @@
 package br.com.floripark.financeiro.dao.impl;
 
 import br.com.floripark.financeiro.dao.IRetornoBancarioDao;
+import br.com.floripark.financeiro.model.Banco;
+import br.com.floripark.financeiro.model.Empresa;
 import br.com.floripark.financeiro.model.RetornoBancario;
+import br.com.floripark.financeiro.model.Servico;
 import br.com.floripark.financeiro.model.Usuario;
 import br.com.floripark.financeiro.util.EntityManagerUtil;
 import static br.com.floripark.financeiro.util.EntityManagerUtil.getEntityManager;
@@ -100,5 +103,14 @@ public class RetornoBancarioDao implements IRetornoBancarioDao {
         Boolean incluir = query.execute();
         entityManager.getTransaction().commit();
         return incluir;
+    }
+
+    @Override
+    public ArrayList<RetornoBancario> pesquisarRetorno(Banco banco, Servico servico, Empresa empresa) throws Exception {
+        Query query = entityManager.createQuery("SELECT x FROM RetornoBancario x WHERE x.banco = :b AND x.servico = :s AND x.empresa = :e");
+        query.setParameter("b", banco);
+        query.setParameter("s", servico);
+        query.setParameter("e", empresa);
+        return (ArrayList<RetornoBancario>) query.getResultList();
     }
 }

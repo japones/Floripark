@@ -92,7 +92,6 @@ public class RetornoBancarioService implements IRetornoBancarioService {
 
     @Override
     public Boolean importarRetorno(File arquivo, Usuario usuario) throws Exception {
-
         Date dataInc = new Date();
 
         FileReader frTemp = new FileReader(arquivo.getPath()); // Local do Arquivo  

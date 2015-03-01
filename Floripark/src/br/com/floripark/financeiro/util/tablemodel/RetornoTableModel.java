@@ -1,6 +1,9 @@
 package br.com.floripark.financeiro.util.tablemodel;
 
+import br.com.floripark.financeiro.model.Banco;
+import br.com.floripark.financeiro.model.Empresa;
 import br.com.floripark.financeiro.model.RetornoBancario;
+import br.com.floripark.financeiro.model.Servico;
 import br.com.floripark.financeiro.service.ServiceFactory;
 import java.util.List;
 import java.util.logging.Level;
@@ -11,7 +14,7 @@ public class RetornoTableModel extends AbstractTableModel {
 
     private List<RetornoBancario> retornos;
     private String[] cabecalhoColunas = {"Empresa", "Banco", "Servico", "Data Pagamento"};
-    
+
     public RetornoTableModel() {
         try {
             retornos = ServiceFactory.getRetornoBancarioService().pesquisarRetorno();
@@ -19,7 +22,7 @@ public class RetornoTableModel extends AbstractTableModel {
             Logger.getLogger(RetornoTableModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Override
     public int getRowCount() {
         return retornos.size();

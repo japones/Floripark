@@ -1,6 +1,9 @@
 package br.com.floripark.financeiro.dao;
 
+import br.com.floripark.financeiro.model.Banco;
+import br.com.floripark.financeiro.model.Empresa;
 import br.com.floripark.financeiro.model.RetornoBancario;
+import br.com.floripark.financeiro.model.Servico;
 import br.com.floripark.financeiro.model.Usuario;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,4 +21,6 @@ public interface IRetornoBancarioDao {
     public Boolean executarProcedure (RetornoBancario retorno, Usuario usuario, Date dataInclusao) throws Exception;
 
     public ArrayList<RetornoBancario> pesquisarRetorno() throws Exception;
+    
+    public ArrayList<RetornoBancario> pesquisarRetorno(Banco banco, Servico servico, Empresa empresa) throws Exception;
 }
