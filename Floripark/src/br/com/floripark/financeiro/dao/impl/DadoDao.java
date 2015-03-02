@@ -83,4 +83,12 @@ public class DadoDao implements IDadoDao {
         return lista;
     }
 
+    @Override
+    public ArrayList<Dado> pesquisarDado() throws Exception {
+        ArrayList<Dado> lista;
+        Query query = entityManager.createQuery("SELECT x FROM Dado x");
+        lista = (ArrayList<Dado>) query.getResultList();
+        return lista;
+    }
+
 }

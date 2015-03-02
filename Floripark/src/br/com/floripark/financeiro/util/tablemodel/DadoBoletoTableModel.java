@@ -1,6 +1,7 @@
 package br.com.floripark.financeiro.util.tablemodel;
 
 import br.com.floripark.financeiro.model.Dado;
+import br.com.floripark.financeiro.model.RetornoBancario;
 import br.com.floripark.financeiro.service.ServiceFactory;
 import java.util.List;
 import java.util.logging.Level;
@@ -12,9 +13,9 @@ public class DadoBoletoTableModel extends AbstractTableModel {
     private List<Dado> dados;
     private String[] cabecalhoColunas = {"Cedente", "Data", "Valor", "Autenticação"};
 
-    public DadoBoletoTableModel() {
+    public DadoBoletoTableModel(RetornoBancario retorno) {
         try {
-            dados = ServiceFactory.getDadoService().pe
+            dados = ServiceFactory.getDadoService().pesquisarDado(retorno);
         } catch (Exception ex) {
             Logger.getLogger(DadoBoletoTableModel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -34,13 +35,13 @@ public class DadoBoletoTableModel extends AbstractTableModel {
     public Object getValueAt(int numLinha, int numColuna) {
         switch (numColuna) {
             case 0:
-                return dados.get(numLinha).getEmpresa().getNome();
+                return dados.get(numLinha).getLinha().substring(61, 91);
             case 1:
-                return dados.get(numLinha).getBanco().getNome();
+                return dados.get(numLinha).getLinha().substring(144, 152);
             case 2:
-                return dados.get(numLinha).getServico().getDescricao();
+                return dados.get(numLinha).getLinha().substring(152, 167);
             case 3:
-                return dados.get(numLinha).getDatapagamento().toString();
+                return dados.get(numLinha).getLinha().substring(61, 91);
         }
         return null;
     }

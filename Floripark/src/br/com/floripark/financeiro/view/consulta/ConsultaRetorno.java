@@ -45,7 +45,9 @@ public class ConsultaRetorno extends javax.swing.JDialog {
                     Integer linhaSelecionada = jtRetorno.getSelectedRow();
                     RetornoBancario retornoBancario = ((RetornoTableModel) jtRetorno.getModel()).getRetornoBancario().get(linhaSelecionada);
                     if (retornoBancario != null) {
-                        // ABRIR A TELA DO LOTE;
+                        ConsultaDado consultaDado = new ConsultaDado(null, true, usuarioLogado, retornoBancario);
+                        consultaDado.setLocationRelativeTo(cbBanco);
+                        consultaDado.setVisible(true);
                     }
                 }
             }

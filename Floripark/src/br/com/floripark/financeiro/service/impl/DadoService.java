@@ -1,5 +1,6 @@
 package br.com.floripark.financeiro.service.impl;
 
+import br.com.floripark.financeiro.dao.DaoFactory;
 import br.com.floripark.financeiro.model.Dado;
 import br.com.floripark.financeiro.model.RetornoBancario;
 import br.com.floripark.financeiro.model.Usuario;
@@ -33,6 +34,11 @@ public class DadoService implements IDadoService{
     public ArrayList<Dado> pesquisarDado(RetornoBancario retorno) throws Exception {
         
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Dado> pesquisarDado() throws Exception {
+        return DaoFactory.getDadoDao().pesquisarDado();
     }
     
 }
