@@ -11,7 +11,7 @@ import javax.swing.table.AbstractTableModel;
 public class DadoBoletoTableModel extends AbstractTableModel {
 
     private List<Dado> dados;
-    private String[] cabecalhoColunas = {"Cedente", "Data", "Valor", "Autenticação"};
+    private String[] cabecalhoColunas = {"Cedente", "Data", "Valor"};
 
     public DadoBoletoTableModel(RetornoBancario retorno) {
         try {
@@ -20,7 +20,7 @@ public class DadoBoletoTableModel extends AbstractTableModel {
             Logger.getLogger(DadoBoletoTableModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public int getRowCount() {
         return dados.size();
@@ -33,15 +33,15 @@ public class DadoBoletoTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int numLinha, int numColuna) {
-        switch (numColuna) {
-            case 0:
-                return dados.get(numLinha).getLinha().substring(61, 91);
-            case 1:
-                return dados.get(numLinha).getLinha().substring(144, 152);
-            case 2:
-                return dados.get(numLinha).getLinha().substring(152, 167);
-            case 3:
-                return dados.get(numLinha).getLinha().substring(61, 91);
+        if ("J".equals(dados.get(numLinha).getLinha().substring(13, 14))) {
+            switch (numColuna) {
+                case 0:
+                    return dados.get(numLinha).getLinha().substring(61, 91);
+                case 1:
+                    return dados.get(numLinha).getLinha().substring(144, 152);
+                case 2:
+                    return dados.get(numLinha).getLinha().substring(152, 167);
+            }
         }
         return null;
     }

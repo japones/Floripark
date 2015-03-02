@@ -5,13 +5,18 @@ import br.com.floripark.financeiro.model.RetornoBancario;
 import br.com.floripark.financeiro.model.Usuario;
 import br.com.floripark.financeiro.util.tablemodel.DadoBoletoTableModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class ConsultaDado extends javax.swing.JDialog {
     
     private Usuario ul;
     private RetornoBancario retornoSelecionado;
+    
+    DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
+    DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
 
     public ConsultaDado(java.awt.Frame parent, boolean modal, Usuario usuarioLogado, RetornoBancario retorno) {
         super(parent, modal);
@@ -50,6 +55,11 @@ public class ConsultaDado extends javax.swing.JDialog {
         btSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jtDado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,6 +107,16 @@ public class ConsultaDado extends javax.swing.JDialog {
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         dispose();
     }//GEN-LAST:event_btSairActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        direita.setHorizontalAlignment(SwingConstants.RIGHT);
+        esquerda.setHorizontalAlignment(SwingConstants.LEFT);
+        jtDado.updateUI();
+        jtDado.getRowHeight(0);
+        jtDado.setModel(new DadoBoletoTableModel(retornoSelecionado));
+        jtDado.getColumnModel().getColumn(0).setCellRenderer(direita);
+        jtDado.getColumnModel().getColumn(1).setCellRenderer(esquerda);
+    }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSair;

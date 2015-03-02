@@ -57,7 +57,6 @@ public class Principal extends javax.swing.JFrame {
         mnImportar = new javax.swing.JMenuItem();
         mnComprovante = new javax.swing.JMenuItem();
         mnSair = new javax.swing.JMenu();
-        miSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grupo Floripark");
@@ -203,15 +202,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar2.add(jMenu1);
 
         mnSair.setText("Sair");
-
-        miSair.setText("Sair");
-        miSair.addActionListener(new java.awt.event.ActionListener() {
+        mnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miSairActionPerformed(evt);
+                mnSairActionPerformed(evt);
             }
         });
-        mnSair.add(miSair);
-
         jMenuBar2.add(mnSair);
 
         setJMenuBar(jMenuBar2);
@@ -241,10 +236,6 @@ public class Principal extends javax.swing.JFrame {
         cb.setLocationRelativeTo(this);
         cb.setVisible(true);
     }//GEN-LAST:event_mnCadBancoActionPerformed
-
-    private void miSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSairActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_miSairActionPerformed
 
     private void mnConBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConBancoActionPerformed
         ConsultaBanco cob = new ConsultaBanco(ul, this, true);
@@ -330,12 +321,15 @@ public class Principal extends javax.swing.JFrame {
         consultaServico.setVisible(true);
     }//GEN-LAST:event_mnConServicoActionPerformed
 
+    private void mnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mnSairActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel lblUsuario;
-    private javax.swing.JMenuItem miSair;
     private javax.swing.JMenuItem mnCadBanco;
     private javax.swing.JMenuItem mnCadEMpresa;
     private javax.swing.JMenuItem mnCadGrupoCpa;
