@@ -2,6 +2,7 @@ package br.com.floripark.financeiro.view.consulta;
 
 import br.com.floripark.financeiro.model.Dado;
 import br.com.floripark.financeiro.model.Usuario;
+import br.com.floripark.financeiro.util.tablemodel.ComprovanteBoletoTableModel;
 import java.util.ArrayList;
 
 public class DemonstrativoComprovante extends javax.swing.JDialog {
@@ -28,76 +29,69 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         
         for (Dado dado11 : dados) {
             if ("J".equals(dado11.getLinha().subSequence(13, 14))) {
-                dado1 = dado11.getLinha().substring(182, 203) + "\n";
-                dado2 = dado11.getLinha().substring(91, 93) + "/" + dado11.getLinha().substring(93, 95) + "/" + dado11.getLinha().substring(95, 99) + "\n";
-                dado3 = dado11.getLinha().substring(144, 146) + "/" + dado11.getLinha().substring(146, 148) + "/" + dado11.getLinha().substring(148, 152) + "\n";
-                dado4 = " " + "\n";
-                dado5 = "0,00" + "\n";
-                dado6 = dado11.getLinha().substring(17, 61) + "\n";
-                dado7 = dado11.getLinha().substring(152, 167) + "\n";
-                dado8 = "0,00" + "\n";
-                dado9 = dado11.getLinha().substring(61, 91) + "\n";
+                dado1 = dado11.getLinha().substring(182, 203);
+                dado2 = dado11.getLinha().substring(91, 93) + "/" + dado11.getLinha().substring(93, 95) + "/" + dado11.getLinha().substring(95, 99);
+                dado3 = dado11.getLinha().substring(144, 146) + "/" + dado11.getLinha().substring(146, 148) + "/" + dado11.getLinha().substring(148, 152);
+                dado4 = " ";
+                dado5 = "0,00";
+                dado6 = dado11.getLinha().substring(17, 61);
+                dado7 = dado11.getLinha().substring(152, 167);
+                dado8 = "0,00";
+                dado9 = dado11.getLinha().substring(61, 91);
             }
             if ("Z".equals(dado11.getLinha().substring(13, 14))) {
-                dado10 = dado11.getLinha().substring(78,103) + "\n";
+                dado10 = dado11.getLinha().substring(78,103);
             }
         }
         
-        String linha1 = "Documento empresa:\n";
-        String linha2 = "Data vencimento:\n";
-        String linha3 = "Data pagamento:\n";
-        String linha4 = "Documento banco:\n";
-        String linha5 = "Desconto:\n";
-        String linha6 = "Linha digitável:\n";
-        String linha7 = "Valor título:\n";
-        String linha8 = "Acréscimo:\n";
-        String linha9 = "Nome do cedente:\n";
-        String linha10 = "Autenticação:\n";
+        String linha1 = "Documento empresa:";
+        String linha2 = "Data vencimento:";
+        String linha3 = "Data pagamento:";
+        String linha4 = "Documento banco:";
+        String linha5 = "Desconto:";
+        String linha6 = "Linha digitável:";
+        String linha7 = "Valor título:";
+        String linha8 = "Acréscimo:";
+        String linha9 = "Nome do cedente:";
+        String linha10 = "Autenticação:";
         
-        comprovante = linha1;
-        comprovante = comprovante + linha2;
-        comprovante = comprovante + linha3;
-        comprovante = comprovante + linha4;
-        comprovante = comprovante + linha5;
-        comprovante = comprovante + linha6;
-        comprovante = comprovante + linha7;
-        comprovante = comprovante + linha8;
-        comprovante = comprovante + linha9;
-        comprovante = comprovante + linha10;
-
-        texto = dado1;
-        texto = texto + dado2;
-        texto = texto + dado3;
-        texto = texto + dado4;
-        texto = texto + dado5;
-        texto = texto + dado6;
-        texto = texto + dado7;
-        texto = texto + dado8;
-        texto = texto + dado9;
-        texto = texto + dado10;
+        String [][] comp = new String[2][10];
+        comp[0][0] = linha1;
+        comp[0][1] = linha2;
+        comp[0][2] = linha3;
+        comp[0][3] = linha4;
+        comp[0][4] = linha5;
+        comp[0][5] = linha6;
+        comp[0][6] = linha7;
+        comp[0][7] = linha8;
+        comp[0][8] = linha9;
+        comp[0][9] = linha10;
         
+        comp[1][0] = dado1;
+        comp[1][1] = dado2;
+        comp[1][2] = dado3;
+        comp[1][3] = dado4;
+        comp[1][4] = dado5;
+        comp[1][5] = dado6;
+        comp[1][6] = dado7;
+        comp[1][7] = dado8;
+        comp[1][8] = dado9;
+        comp[1][9] = dado10;
         
-        
-        
-        taFixo.setColumns(2);
-        taFixo.setText(comprovante);
-        taFixo.insert(texto,50);
+        jtDemonstrativo.updateUI();
+        jtDemonstrativo.getRowHeight(0);
+        jtDemonstrativo.setModel(new ComprovanteBoletoTableModel(comp));
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        taFixo = new javax.swing.JTextArea();
         btnSair = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtDemonstrativo = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        taFixo.setEditable(false);
-        taFixo.setColumns(2);
-        taFixo.setRows(5);
-        jScrollPane1.setViewportView(taFixo);
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -106,23 +100,34 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
             }
         });
 
+        jtDemonstrativo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jtDemonstrativo);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(647, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSair))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSair)
                 .addContainerGap())
@@ -137,7 +142,7 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSair;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea taFixo;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jtDemonstrativo;
     // End of variables declaration//GEN-END:variables
 }
