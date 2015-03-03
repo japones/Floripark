@@ -4,6 +4,7 @@ import br.com.floripark.financeiro.model.Dado;
 import br.com.floripark.financeiro.model.RetornoBancario;
 import br.com.floripark.financeiro.model.Usuario;
 import br.com.floripark.financeiro.util.tablemodel.DadoBoletoTableModel;
+import java.util.ArrayList;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
@@ -39,6 +40,12 @@ public class ConsultaDado extends javax.swing.JDialog {
                     Integer linhaSelecionada = jtDado.getSelectedRow();
                     Dado dadoSelecionado = ((DadoBoletoTableModel) jtDado.getModel()).getRetornoBancario().get(linhaSelecionada);
                     if (dadoSelecionado != null) {
+                        ArrayList<Dado> dados = new ArrayList<>();
+                        dados.add(dadoSelecionado);
+                        dados.add(((DadoBoletoTableModel) jtDado.getModel()).getRetornoBancario().get(linhaSelecionada + 1));
+                        DemonstrativoComprovante demonstrativo = new DemonstrativoComprovante(null, true, ul, dados);
+                        demonstrativo.setLocationRelativeTo(btSair);
+                        demonstrativo.setVisible(true);
                         jtDado.setModel(new DadoBoletoTableModel(retornoSelecionado));
                     }
                 }
