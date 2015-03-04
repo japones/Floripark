@@ -45,6 +45,10 @@ public class RetornoBancario implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Basic
     private Date datapagamento;
+    
+    @Column(name = "LINHA", table = "FN_RETORNOSBANCARIOS", nullable = false, length = 200)
+    @Basic
+    private String linha;
 
     @Column(name="ARQUIVO",table="FN_RETORNOSBANCARIOS",nullable=false)
     @Lob
@@ -162,5 +166,13 @@ public class RetornoBancario implements Serializable {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public String getLinha() {
+        return linha;
+    }
+
+    public void setLinha(String linha) {
+        this.linha = linha;
     }
 }

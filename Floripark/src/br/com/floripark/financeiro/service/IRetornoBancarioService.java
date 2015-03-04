@@ -7,7 +7,7 @@ import java.util.Date;
 
 public interface IRetornoBancarioService {
     
-    public RetornoBancario inserirRetorno(Servico servico, Empresa empresa, Banco banco, Date dataPagamento, File arquivo, Usuario usuario) throws Exception;
+    public RetornoBancario inserirRetorno(Servico servico, Empresa empresa, Banco banco, Date dataPagamento, File arquivo, String linha, Usuario usuario) throws Exception;
     
     public void excluirRetorno(Integer id) throws Exception;
     

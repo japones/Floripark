@@ -25,7 +25,7 @@ public class RetornoBancarioService implements IRetornoBancarioService {
     private Date dataAlteracao;
 
     @Override
-    public RetornoBancario inserirRetorno(Servico servico, Empresa empresa, Banco banco, Date dataPagamento, File arquivo, Usuario usuario) throws Exception {
+    public RetornoBancario inserirRetorno(Servico servico, Empresa empresa, Banco banco, Date dataPagamento, File arquivo, String linha, Usuario usuario) throws Exception {
         dataInclusao = new Date();
         retorno = new RetornoBancario();
 
@@ -46,6 +46,7 @@ public class RetornoBancarioService implements IRetornoBancarioService {
         retorno.setArquivo(bFile);
         retorno.setDatainclusao(dataInclusao);
         retorno.setUsuarioinclusao(usuario);
+        retorno.setLinha(linha);
         return DaoFactory.getRetornoBancarioDao().inserirRetorno(retorno);
     }
 
@@ -153,8 +154,19 @@ public class RetornoBancarioService implements IRetornoBancarioService {
         String completo = dia + "/" + mes + "/" + ano;
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date dataPagamento = (Date) formatter.parse(completo);
-
-        RetornoBancario ret = inserirRetorno(servico, emp, banco, dataPagamento, arquivo, usuario);
+        
+        // CAPTURA A PRIMEIRA LINHA
+        FileReader frLinha = new FileReader(arquivo.getPath());
+        BufferedReader brLinha = new BufferedReader(frLinha);
+        String linha = "";
+        while ("".equals(linha)) {
+            String var = brLinha.readLine();
+            if ("0".equals(var.substring(7, 8))) {
+                linha = var;
+            }
+        }
+        
+        RetornoBancario ret = inserirRetorno(servico, emp, banco, dataPagamento, arquivo, linha, usuario);
 
         if (ret == null) {
             JOptionPane.showMessageDialog(null, "Problemas na inclusão do arquivo!");
