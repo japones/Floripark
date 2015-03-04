@@ -8,8 +8,6 @@ import java.util.ArrayList;
 public class DemonstrativoComprovante extends javax.swing.JDialog {
     
     private Usuario ul;
-    private String comprovante;
-    private String texto;
 
     public DemonstrativoComprovante(java.awt.Frame parent, boolean modal, Usuario usuario, ArrayList<Dado> dados) {
         super(parent, modal);
@@ -90,6 +88,7 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         btnSair = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtDemonstrativo = new javax.swing.JTable();
+        lbLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -110,6 +109,8 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(jtDemonstrativo);
 
+        lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logoemp.jpg"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,14 +121,19 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSair))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbLogo)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addComponent(lbLogo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSair)
                 .addContainerGap())
@@ -144,5 +150,6 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
     private javax.swing.JButton btnSair;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jtDemonstrativo;
+    private javax.swing.JLabel lbLogo;
     // End of variables declaration//GEN-END:variables
 }
