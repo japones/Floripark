@@ -1,6 +1,7 @@
 package br.com.floripark.financeiro.view.consulta;
 
 import br.com.floripark.financeiro.model.Dado;
+import br.com.floripark.financeiro.model.Empresa;
 import br.com.floripark.financeiro.model.RetornoBancario;
 import br.com.floripark.financeiro.model.Usuario;
 import br.com.floripark.financeiro.util.tablemodel.DadoBoletoTableModel;
@@ -15,15 +16,17 @@ public class ConsultaDado extends javax.swing.JDialog {
     
     private Usuario ul;
     private RetornoBancario retornoSelecionado;
+    private Empresa empresaSelecionada;
     
     DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
     DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
 
-    public ConsultaDado(java.awt.Frame parent, boolean modal, Usuario usuarioLogado, RetornoBancario retorno) {
+    public ConsultaDado(java.awt.Frame parent, boolean modal, Usuario usuarioLogado, RetornoBancario retorno, Empresa empresa) {
         super(parent, modal);
         initComponents();
         ul = usuarioLogado;
         retornoSelecionado = retorno;
+        empresaSelecionada = empresa;
         // Lógica para manipular uma linha do JTable quando esta é selecionada    
         ListSelectionModel linhaModeloSelecao = jtDado.getSelectionModel();
         linhaModeloSelecao.addListSelectionListener(new ListSelectionListener() {
@@ -43,7 +46,7 @@ public class ConsultaDado extends javax.swing.JDialog {
                         ArrayList<Dado> dados = new ArrayList<>();
                         dados.add(dadoSelecionado);
                         dados.add(((DadoBoletoTableModel) jtDado.getModel()).getRetornoBancario().get(linhaSelecionada + 1));
-                        DemonstrativoComprovante demonstrativo = new DemonstrativoComprovante(null, true, ul, dados);
+                        DemonstrativoComprovante demonstrativo = new DemonstrativoComprovante(null, true, ul, dados, empresa);
                         demonstrativo.setLocationRelativeTo(btSair);
                         demonstrativo.setVisible(true);
                         jtDado.setModel(new DadoBoletoTableModel(retornoSelecionado));

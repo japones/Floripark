@@ -44,8 +44,9 @@ public class ConsultaRetorno extends javax.swing.JDialog {
                 if (jtRetorno.getSelectedRow() >= 0) {
                     Integer linhaSelecionada = jtRetorno.getSelectedRow();
                     RetornoBancario retornoBancario = ((RetornoTableModel) jtRetorno.getModel()).getRetornoBancario().get(linhaSelecionada);
+                    Empresa empresa = ((RetornoTableModel) jtRetorno.getModel()).getRetornoBancario().get(linhaSelecionada).getEmpresa();
                     if (retornoBancario != null) {
-                        ConsultaDado consultaDado = new ConsultaDado(null, true, usuarioLogado, retornoBancario);
+                        ConsultaDado consultaDado = new ConsultaDado(null, true, usuarioLogado, retornoBancario, empresa);
                         consultaDado.setLocationRelativeTo(cbBanco);
                         consultaDado.setVisible(true);
                     }

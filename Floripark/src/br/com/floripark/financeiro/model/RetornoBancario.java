@@ -24,43 +24,53 @@ import javax.persistence.UniqueConstraint;
 @Table(name="FN_RETORNOSBANCARIOS",uniqueConstraints=@UniqueConstraint(columnNames={"ID"}))
 public class RetornoBancario implements Serializable {
 
-    @Column(name="DATAPAGAMENTO",table="FN_RETORNOSBANCARIOS",nullable=false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @Basic
-    private Date datapagamento;
-    @ManyToOne(targetEntity = Usuario.class)
-    @JoinColumn(name="USUARIOALTERACAO",referencedColumnName="ID")
-    private Usuario usuarioalteracao;
-    @Column(name="DATAINCLUSAO",table="FN_RETORNOSBANCARIOS")
-    @Temporal(TemporalType.TIMESTAMP)
-    @Basic
-    private Date datainclusao;
-    @ManyToOne(optional=false,targetEntity = Usuario.class)
-    @JoinColumn(name="USUARIOINCLUSAO",referencedColumnName="ID")
-    private Usuario usuarioinclusao;
-    @Column(name="ARQUIVO",table="FN_RETORNOSBANCARIOS",nullable=false)
-    @Lob
-    @Basic
-    private byte [] arquivo;
-    @ManyToOne(optional=false,targetEntity = Banco.class)
-    @JoinColumn(name="BANCO",referencedColumnName="ID")
-    private Banco banco;
     @Column(name="ID",table="FN_RETORNOSBANCARIOS",nullable=false)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToMany(targetEntity = Dado.class,mappedBy = "retorno")
-    private Collection<Dado> dadoCollection;
+
+    @ManyToOne(optional=false,targetEntity = Empresa.class)
+    @JoinColumn(name="EMPRESA",referencedColumnName="ID")
+    private Empresa empresa;
+
+    @ManyToOne(optional=false,targetEntity = Banco.class)
+    @JoinColumn(name="BANCO",referencedColumnName="ID")
+    private Banco banco;
+
+    @ManyToOne(optional=false,targetEntity = Servico.class)
+    @JoinColumn(name="SERVICO",referencedColumnName="ID")
+    private Servico servico;
+
+    @Column(name="DATAPAGAMENTO",table="FN_RETORNOSBANCARIOS",nullable=false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Basic
+    private Date datapagamento;
+
+    @Column(name="ARQUIVO",table="FN_RETORNOSBANCARIOS",nullable=false)
+    @Lob
+    @Basic
+    private byte [] arquivo;
+
+    @ManyToOne(optional=false,targetEntity = Usuario.class)
+    @JoinColumn(name="USUARIOINCLUSAO",referencedColumnName="ID")
+    private Usuario usuarioinclusao;
+
+    @Column(name="DATAINCLUSAO",table="FN_RETORNOSBANCARIOS")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Basic
+    private Date datainclusao;
+
+    @ManyToOne(targetEntity = Usuario.class)
+    @JoinColumn(name="USUARIOALTERACAO",referencedColumnName="ID")
+    private Usuario usuarioalteracao;
+
     @Column(name="DATAALTERACAO",table="FN_RETORNOSBANCARIOS")
     @Temporal(TemporalType.TIMESTAMP)
     @Basic
     private Date dataalteracao;
-    @ManyToOne(optional=false,targetEntity = Servico.class)
-    @JoinColumn(name="SERVICO",referencedColumnName="ID")
-    private Servico servico;
-    @ManyToOne(optional=false,targetEntity = Empresa.class)
-    @JoinColumn(name="EMPRESA",referencedColumnName="ID")
-    private Empresa empresa;
+
+    @OneToMany(targetEntity = Dado.class,mappedBy = "retorno")
+    private Collection<Dado> dadoCollection;
 
     public RetornoBancario() {
 

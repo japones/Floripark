@@ -1,6 +1,7 @@
 package br.com.floripark.financeiro.view.consulta;
 
 import br.com.floripark.financeiro.model.Dado;
+import br.com.floripark.financeiro.model.Empresa;
 import br.com.floripark.financeiro.model.Usuario;
 import br.com.floripark.financeiro.util.tablemodel.ComprovanteBoletoTableModel;
 import java.util.ArrayList;
@@ -8,11 +9,16 @@ import java.util.ArrayList;
 public class DemonstrativoComprovante extends javax.swing.JDialog {
     
     private Usuario ul;
+    private String agencia;
+    private String conta;
+    private String cnpj;
+    private Empresa empresaSelecionada;
 
-    public DemonstrativoComprovante(java.awt.Frame parent, boolean modal, Usuario usuario, ArrayList<Dado> dados) {
+    public DemonstrativoComprovante(java.awt.Frame parent, boolean modal, Usuario usuario, ArrayList<Dado> dados, Empresa empresa) {
         super(parent, modal);
         initComponents();
         ul = usuario;
+        empresaSelecionada = empresa;
         
         String dado1 = null;
         String dado2 = null;
@@ -79,6 +85,9 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         jtDemonstrativo.updateUI();
         jtDemonstrativo.getRowHeight(0);
         jtDemonstrativo.setModel(new ComprovanteBoletoTableModel(comp));
+        
+        lbCnpj.setText(empresaSelecionada.getNome().toUpperCase());
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -89,6 +98,13 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jtDemonstrativo = new javax.swing.JTable();
         lbLogo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lbAgenciaDebito = new javax.swing.JLabel();
+        lbContaDebito = new javax.swing.JLabel();
+        lbCnpj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -111,6 +127,47 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
 
         lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logoemp.jpg"))); // NOI18N
 
+        jLabel1.setText("Agência débito:");
+
+        jLabel2.setText("Conta débito:");
+
+        jLabel3.setText("CPF / CNPJ:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbCnpj)
+                    .addComponent(lbContaDebito)
+                    .addComponent(lbAgenciaDebito))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lbAgenciaDebito))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lbContaDebito))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lbCnpj))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,7 +181,8 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbLogo)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -133,7 +191,9 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lbLogo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSair)
                 .addContainerGap())
@@ -148,8 +208,15 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSair;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jtDemonstrativo;
+    private javax.swing.JLabel lbAgenciaDebito;
+    private javax.swing.JLabel lbCnpj;
+    private javax.swing.JLabel lbContaDebito;
     private javax.swing.JLabel lbLogo;
     // End of variables declaration//GEN-END:variables
 }
