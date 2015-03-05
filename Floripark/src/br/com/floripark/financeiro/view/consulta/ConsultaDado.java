@@ -46,7 +46,7 @@ public class ConsultaDado extends javax.swing.JDialog {
                         ArrayList<Dado> dados = new ArrayList<>();
                         dados.add(dadoSelecionado);
                         dados.add(((DadoBoletoTableModel) jtDado.getModel()).getRetornoBancario().get(linhaSelecionada + 1));
-                        DemonstrativoComprovante demonstrativo = new DemonstrativoComprovante(null, true, ul, dados, empresa);
+                        DemonstrativoComprovante demonstrativo = new DemonstrativoComprovante(null, true, ul, dados, empresa, retornoSelecionado.getLinha());
                         demonstrativo.setLocationRelativeTo(btSair);
                         demonstrativo.setVisible(true);
                         jtDado.setModel(new DadoBoletoTableModel(retornoSelecionado));

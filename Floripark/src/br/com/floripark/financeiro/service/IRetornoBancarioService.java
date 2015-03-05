@@ -1,5 +1,6 @@
 package br.com.floripark.financeiro.service;
 
+import br.com.floripark.financeiro.model.RetornoBancario;
 import br.com.floripark.financeiro.model.*;
 import java.io.File;
 import java.util.ArrayList;

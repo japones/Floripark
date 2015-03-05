@@ -23,7 +23,6 @@
     <class>br.com.floripark.financeiro.model.Temporario</class>
     <class>Temporario</class>
     <class>Dado</class>
-    <class>RetornoBancario</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://192.168.1.251\floripark:1433;databaseName=floripark"/>
       <property name="javax.persistence.jdbc.user" value="floripark"/>

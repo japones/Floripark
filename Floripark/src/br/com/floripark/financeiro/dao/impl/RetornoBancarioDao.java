@@ -102,6 +102,7 @@ public class RetornoBancarioDao implements IRetornoBancarioDao {
         query.setParameter("@DATA_INCLUSAO", dataInclusao); //seta o parametro
         Boolean incluir = query.execute();
         entityManager.getTransaction().commit();
+        
         return incluir;
     }
 

@@ -37,6 +37,7 @@ public class RetornoBancarioService implements IRetornoBancarioService {
             fileInputStream.read(bFile);
             fileInputStream.close();
         } catch (Exception e) {
+            
         }
 
         retorno.setServico(servico);
@@ -47,6 +48,7 @@ public class RetornoBancarioService implements IRetornoBancarioService {
         retorno.setDatainclusao(dataInclusao);
         retorno.setUsuarioinclusao(usuario);
         retorno.setLinha(linha);
+        
         return DaoFactory.getRetornoBancarioDao().inserirRetorno(retorno);
     }
 
@@ -102,8 +104,9 @@ public class RetornoBancarioService implements IRetornoBancarioService {
         while ((s = brTemp.readLine()) != null) {
             ServiceFactory.getTemporarioService().inserirTemporario(s);
         }
-
-        // OBTENÇÃO DOS DADOS PARA INSERIR NA TABELA RETORNO BANCARIO
+        // **************************************************************
+        // * OBTENÇÃO DOS DADOS PARA INSERIR NA TABELA RETORNO BANCARIO *
+        // **************************************************************
         // CAPTURA DO SERVIÇO
         FileReader frServico = new FileReader(arquivo.getPath());
         BufferedReader brServico = new BufferedReader(frServico);

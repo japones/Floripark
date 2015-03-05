@@ -14,11 +14,16 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
     private String cnpj;
     private Empresa empresaSelecionada;
 
-    public DemonstrativoComprovante(java.awt.Frame parent, boolean modal, Usuario usuario, ArrayList<Dado> dados, Empresa empresa) {
+    public DemonstrativoComprovante(java.awt.Frame parent, boolean modal, Usuario usuario, ArrayList<Dado> dados, Empresa empresa, String linha) {
         super(parent, modal);
         initComponents();
         ul = usuario;
         empresaSelecionada = empresa;
+        
+        agencia = linha.substring(52, 57) + " - " + linha.substring(57, 58);
+        conta = linha.substring(58, 70) + " - " + linha.substring(70, 71);
+        cnpj = linha.substring(18, 32) + " - " + linha.substring(72, 102);
+        
         
         String dado1 = null;
         String dado2 = null;
@@ -39,7 +44,7 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
                 dado4 = " ";
                 dado5 = "0,00";
                 dado6 = dado11.getLinha().substring(17, 61);
-                dado7 = dado11.getLinha().substring(152, 167);
+                dado7 = dado11.getLinha().substring(152, 162) + "." + dado11.getLinha().substring(162, 165) + "," + dado11.getLinha().substring(165, 167);
                 dado8 = "0,00";
                 dado9 = dado11.getLinha().substring(61, 91);
             }
@@ -86,7 +91,9 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         jtDemonstrativo.getRowHeight(0);
         jtDemonstrativo.setModel(new ComprovanteBoletoTableModel(comp));
         
-        lbCnpj.setText(empresaSelecionada.getNome().toUpperCase());
+        lbAgenciaDebito.setText(agencia);
+        lbContaDebito.setText(conta);
+        lbCnpj.setText(cnpj);
         
     }
 
