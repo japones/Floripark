@@ -132,7 +132,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
     public static void main(String args[]) {

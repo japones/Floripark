@@ -3,6 +3,7 @@ package br.com.floripark.financeiro.view.consulta;
 import br.com.floripark.financeiro.model.Dado;
 import br.com.floripark.financeiro.model.Empresa;
 import br.com.floripark.financeiro.model.Usuario;
+import br.com.floripark.financeiro.util.CalculaDigito;
 import br.com.floripark.financeiro.util.tablemodel.ComprovanteBoletoTableModel;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
     private String conta;
     private String cnpj;
     private Empresa empresaSelecionada;
+    private CalculaDigito calculaDigito;
 
     public DemonstrativoComprovante(java.awt.Frame parent, boolean modal, Usuario usuario, ArrayList<Dado> dados, Empresa empresa, String linha) {
         super(parent, modal);
@@ -24,6 +26,7 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         conta = linha.substring(58, 70) + " - " + linha.substring(70, 71);
         cnpj = linha.substring(18, 32) + " - " + linha.substring(72, 102);
         
+        calculaDigito = new CalculaDigito();
         
         String dado1 = null;
         String dado2 = null;
@@ -43,7 +46,7 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
                 dado3 = dado11.getLinha().substring(144, 146) + "/" + dado11.getLinha().substring(146, 148) + "/" + dado11.getLinha().substring(148, 152);
                 dado4 = " ";
                 dado5 = "0,00";
-                dado6 = dado11.getLinha().substring(17, 61);
+                dado6 = calculaDigito.CodigoBarra(dado11.getLinha());
                 dado7 = dado11.getLinha().substring(152, 162) + "." + dado11.getLinha().substring(162, 165) + "," + dado11.getLinha().substring(165, 167);
                 dado8 = "0,00";
                 dado9 = dado11.getLinha().substring(61, 91);
@@ -90,10 +93,13 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         jtDemonstrativo.updateUI();
         jtDemonstrativo.getRowHeight(0);
         jtDemonstrativo.setModel(new ComprovanteBoletoTableModel(comp));
+        jtDemonstrativo.getColumnModel().getColumn(0).setPreferredWidth(40);
+        jtDemonstrativo.getColumnModel().getColumn(1).setPreferredWidth(150);
         
         lbAgenciaDebito.setText(agencia);
         lbContaDebito.setText(conta);
         lbCnpj.setText(cnpj);
+        
         
     }
 
@@ -114,6 +120,7 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         lbCnpj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Grupo Floripark");
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
