@@ -111,13 +111,11 @@ public class CalculaDigito {
                 if (res > 9) {
                     res = (res - 10) + 1;
                 }
-                System.out.println("passada 2 " + i + ":" + campos[i] + " * " + res);
             } else {
                 res = campos[i] * 1;
                 if (res > 9) {
                     res = (res - 10) + 1;
                 }
-                System.out.println("passada 1 " + i + ":" + campos[i] + " * " + res);
             }
             controle++;
             resto = resto + res;
@@ -127,5 +125,4 @@ public class CalculaDigito {
         System.out.println(ret);
         return ret;
     }
-
 }

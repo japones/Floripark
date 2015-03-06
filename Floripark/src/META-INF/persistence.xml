@@ -24,7 +24,7 @@
     <class>Temporario</class>
     <class>Dado</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://192.168.1.251\floripark:1433;databaseName=floripark"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://177.43.42.186:1435;databaseName=floripark"/>
       <property name="javax.persistence.jdbc.user" value="floripark"/>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
       <property name="javax.persistence.jdbc.password" value="flk2014#"/>

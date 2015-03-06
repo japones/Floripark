@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3d8fb49e-98a6-4283-b740-8f6278efb6df">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE6E6">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="ad2f6365-5e4e-4dd0-9f5c-a1c32f6b0adb"/>
+	<queryString>
+		<![CDATA[SELECT 
+CAST((SUBSTRING(A.LINHA,53,5)) AS NUMERIC) AGENCIA,
+SUBSTRING(A.LINHA,58,1) DVAGENCIA,
+FORMAT(CAST((SUBSTRING(A.LINHA,59,12)) AS NUMERIC), '###,###,###') CONTA,
+SUBSTRING(A.LINHA,71,1) DVCONTA,
+FORMAT(CAST((SUBSTRING(A.LINHA,19,14)) AS NUMERIC), '########/####-##') CNPJ,
+SUBSTRING(A.LINHA,73,30) EMPRESA
+FROM FN_RETORNOSBANCARIOS A
+]]>
+	</queryString>
+	<field name="AGENCIA" class="java.math.BigDecimal"/>
+	<field name="DVAGENCIA" class="java.lang.String"/>
+	<field name="CONTA" class="java.lang.String"/>
+	<field name="DVCONTA" class="java.lang.String"/>
+	<field name="CNPJ" class="java.lang.String"/>
+	<field name="EMPRESA" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<image>
+				<reportElement uuid="9fbdb7a0-d6ad-4b3d-b55b-8749e82e6c56" x="0" y="0" width="88" height="54"/>
+				<imageExpression><![CDATA["C:\\Repositorio Git\\Floripark\\Floripark\\Floripark\\src\\Imagens\\logoemp.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="65" splitType="Stretch">
+			<textField>
+				<reportElement uuid="77829218-3e66-4391-b9fb-a864a77b3444" x="100" y="0" width="131" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{AGENCIA} + " - " + $F{DVAGENCIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="21cdb7d2-f3f5-4ceb-88ac-8afd9feaca0d" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Agência débito:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="35bd2a22-265f-452d-875c-ce0adafd626d" x="0" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Conta débito:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="864add5b-cb8b-45e1-9f25-221df5ee9f6b" x="0" y="40" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["CNPJ:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8ace5b0f-84d7-40da-99d6-9d4197c77dd7" x="100" y="20" width="131" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CONTA} + " - " + $F{DVCONTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="098184d4-b683-4e1b-bd79-092a3a2179a9" x="100" y="40" width="406" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CNPJ} + "  " + $F{EMPRESA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
