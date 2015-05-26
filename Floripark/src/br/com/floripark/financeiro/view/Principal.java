@@ -8,9 +8,9 @@ import br.com.floripark.financeiro.view.cadastro.CadastroGrupoCpa;
 import br.com.floripark.financeiro.view.cadastro.CadastroServico;
 import br.com.floripark.financeiro.view.cadastro.CadastroTipoLancamento;
 import br.com.floripark.financeiro.view.cadastro.CadastroUsuario;
-import br.com.floripark.financeiro.view.cadastro.IncluirRetornoBancario;
+import br.com.floripark.financeiro.view.retorno.IncluirRetornoBancario;
 import br.com.floripark.financeiro.view.consulta.ConsultaBanco;
-import br.com.floripark.financeiro.view.consulta.ConsultaRetorno;
+import br.com.floripark.financeiro.view.retorno.ConsultaRetorno;
 import br.com.floripark.financeiro.view.consulta.ConsultaEmpresa;
 import br.com.floripark.financeiro.view.consulta.ConsultaGrupoCpa;
 import br.com.floripark.financeiro.view.consulta.ConsultaServico;
@@ -53,7 +53,7 @@ public class Principal extends javax.swing.JFrame {
         mnConServico = new javax.swing.JMenuItem();
         mnConTipoLancamento = new javax.swing.JMenuItem();
         mnConUsuario = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        mnRetorno = new javax.swing.JMenu();
         mnImportar = new javax.swing.JMenuItem();
         mnComprovante = new javax.swing.JMenuItem();
         mnSair = new javax.swing.JMenu();
@@ -181,7 +181,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar2.add(mnConsulta);
 
-        jMenu1.setText("Retorno");
+        mnRetorno.setText("Retorno");
 
         mnImportar.setText("Importar");
         mnImportar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +189,7 @@ public class Principal extends javax.swing.JFrame {
                 mnImportarActionPerformed(evt);
             }
         });
-        jMenu1.add(mnImportar);
+        mnRetorno.add(mnImportar);
 
         mnComprovante.setText("Comprovante");
         mnComprovante.addActionListener(new java.awt.event.ActionListener() {
@@ -197,14 +197,14 @@ public class Principal extends javax.swing.JFrame {
                 mnComprovanteActionPerformed(evt);
             }
         });
-        jMenu1.add(mnComprovante);
+        mnRetorno.add(mnComprovante);
 
-        jMenuBar2.add(jMenu1);
+        jMenuBar2.add(mnRetorno);
 
         mnSair.setText("Sair");
-        mnSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnSairActionPerformed(evt);
+        mnSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnSairMouseClicked(evt);
             }
         });
         jMenuBar2.add(mnSair);
@@ -321,12 +321,11 @@ public class Principal extends javax.swing.JFrame {
         consultaServico.setVisible(true);
     }//GEN-LAST:event_mnConServicoActionPerformed
 
-    private void mnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSairActionPerformed
+    private void mnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnSairMouseClicked
         System.exit(0);
-    }//GEN-LAST:event_mnSairActionPerformed
+    }//GEN-LAST:event_mnSairMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel lblUsuario;
@@ -347,6 +346,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu mnConsulta;
     private javax.swing.JMenuItem mnDataMovimento;
     private javax.swing.JMenuItem mnImportar;
+    private javax.swing.JMenu mnRetorno;
     private javax.swing.JMenu mnSair;
     // End of variables declaration//GEN-END:variables
 }

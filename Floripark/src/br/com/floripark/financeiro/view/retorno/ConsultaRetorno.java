@@ -1,4 +1,4 @@
-package br.com.floripark.financeiro.view.consulta;
+package br.com.floripark.financeiro.view.retorno;
 
 import br.com.floripark.financeiro.model.Banco;
 import br.com.floripark.financeiro.model.Empresa;

@@ -1,4 +1,4 @@
-package br.com.floripark.financeiro.view.cadastro;
+package br.com.floripark.financeiro.view.retorno;
 
 import br.com.floripark.financeiro.model.Usuario;
 import br.com.floripark.financeiro.service.ServiceFactory;

@@ -1,10 +1,11 @@
-package br.com.floripark.financeiro.view.consulta;
+package br.com.floripark.financeiro.view.retorno;
 
 import br.com.floripark.financeiro.model.Dado;
 import br.com.floripark.financeiro.model.Empresa;
 import br.com.floripark.financeiro.model.RetornoBancario;
 import br.com.floripark.financeiro.model.Usuario;
 import br.com.floripark.financeiro.util.tablemodel.DadoBoletoTableModel;
+import br.com.floripark.financeiro.view.consulta.DemonstrativoComprovante;
 import java.util.ArrayList;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
