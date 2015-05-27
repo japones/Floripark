@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f7f8f5bf-0440-499a-ab01-b9bda2990326">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DADOS" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT SUBSTRING(B.LINHA ,53,5) + ' - ' + SUBSTRING(B.LINHA ,58,1) AGENCIA, SUBSTRING(B.LINHA ,59,12) + ' - ' + SUBSTRING(B.LINHA ,71,1) CONTA,
+SUBSTRING(B.LINHA ,73,30) EMPRESA, 
+SUBSTRING(B.LINHA ,19,2) + '.'+ SUBSTRING(B.LINHA ,21,3) + '.'+ SUBSTRING(B.LINHA ,24,3) + '/'+ SUBSTRING(B.LINHA ,27,4) + '-'+ SUBSTRING(B.LINHA ,31,2) CNPJ
+FROM FN_DADOS A
+INNER JOIN FN_RETORNOSBANCARIOS B ON B.ID = A.RETORNO
+WHERE A.ID IN ($P{DADOS})]]>
+	</queryString>
+	<field name="AGENCIA" class="java.lang.String"/>
+	<field name="CONTA" class="java.lang.String"/>
+	<field name="EMPRESA" class="java.lang.String"/>
+	<field name="CNPJ" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e71d1a80-9521-4bc5-886f-6df15189569f" x="0" y="0" width="555" height="20"/>
+				<textElement/>
+				<text><![CDATA[Comprovante]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="626b0c1d-37df-4a0a-9542-5b400122d17e" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[AGENCIA]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="34c1919a-a616-4e2c-b7bd-948546957d14" x="100" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{AGENCIA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d0328b67-efeb-450c-9973-40c59172d058" x="0" y="20" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[CONTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b4f33d99-84be-4b79-9186-3d2130cc9b4d" x="0" y="40" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="76028cc9-5284-4de5-a128-a5e66da83763" x="0" y="60" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[CNPJ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="73a2c10b-5e5d-4314-bd9d-110e58145130" x="100" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CONTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ec99aaac-5950-46bf-a145-7f10bf3817bb" x="100" y="40" width="332" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EMPRESA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b3cd960a-596f-4865-8e61-35151caa9d6e" x="100" y="60" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CNPJ}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="167" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

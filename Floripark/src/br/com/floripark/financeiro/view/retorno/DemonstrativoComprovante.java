@@ -1,4 +1,4 @@
-package br.com.floripark.financeiro.view.consulta;
+package br.com.floripark.financeiro.view.retorno;
 
 import br.com.floripark.financeiro.model.Dado;
 import br.com.floripark.financeiro.model.Empresa;
@@ -6,28 +6,39 @@ import br.com.floripark.financeiro.model.Usuario;
 import br.com.floripark.financeiro.util.CalculaDigito;
 import br.com.floripark.financeiro.util.tablemodel.ComprovanteBoletoTableModel;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class DemonstrativoComprovante extends javax.swing.JDialog {
-    
+
     private Usuario ul;
     private String agencia;
     private String conta;
     private String cnpj;
     private Empresa empresaSelecionada;
     private CalculaDigito calculaDigito;
+    private List<String> lista;
 
     public DemonstrativoComprovante(java.awt.Frame parent, boolean modal, Usuario usuario, ArrayList<Dado> dados, Empresa empresa, String linha) {
         super(parent, modal);
         initComponents();
         ul = usuario;
         empresaSelecionada = empresa;
-        
+
         agencia = linha.substring(52, 57) + " - " + linha.substring(57, 58);
         conta = linha.substring(58, 70) + " - " + linha.substring(70, 71);
         cnpj = linha.substring(18, 32) + " - " + linha.substring(72, 102);
-        
+
         calculaDigito = new CalculaDigito();
-        
+
         String dado1 = null;
         String dado2 = null;
         String dado3 = null;
@@ -38,7 +49,7 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         String dado8 = null;
         String dado9 = null;
         String dado10 = null;
-        
+
         for (Dado dado11 : dados) {
             if ("J".equals(dado11.getLinha().subSequence(13, 14))) {
                 dado1 = dado11.getLinha().substring(182, 203);
@@ -52,10 +63,10 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
                 dado9 = dado11.getLinha().substring(61, 91);
             }
             if ("Z".equals(dado11.getLinha().substring(13, 14))) {
-                dado10 = dado11.getLinha().substring(78,103);
+                dado10 = dado11.getLinha().substring(78, 103);
             }
         }
-        
+
         String linha1 = "Documento empresa:";
         String linha2 = "Data vencimento:";
         String linha3 = "Data pagamento:";
@@ -66,8 +77,8 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         String linha8 = "Acréscimo:";
         String linha9 = "Nome do cedente:";
         String linha10 = "Autenticação:";
-        
-        String [][] comp = new String[2][10];
+
+        String[][] comp = new String[2][10];
         comp[0][0] = linha1;
         comp[0][1] = linha2;
         comp[0][2] = linha3;
@@ -78,7 +89,7 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         comp[0][7] = linha8;
         comp[0][8] = linha9;
         comp[0][9] = linha10;
-        
+
         comp[1][0] = dado1;
         comp[1][1] = dado2;
         comp[1][2] = dado3;
@@ -89,18 +100,22 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         comp[1][7] = dado8;
         comp[1][8] = dado9;
         comp[1][9] = dado10;
-        
+
         jtDemonstrativo.updateUI();
         jtDemonstrativo.getRowHeight(0);
         jtDemonstrativo.setModel(new ComprovanteBoletoTableModel(comp));
         jtDemonstrativo.getColumnModel().getColumn(0).setPreferredWidth(40);
         jtDemonstrativo.getColumnModel().getColumn(1).setPreferredWidth(150);
-        
+
         lbAgenciaDebito.setText(agencia);
         lbContaDebito.setText(conta);
         lbCnpj.setText(cnpj);
         
-        
+        lista = new ArrayList(10);
+        for (int i = 0; i < comp.length; i++) {
+            lista.add(comp[1][i]);
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -118,6 +133,7 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         lbAgenciaDebito = new javax.swing.JLabel();
         lbContaDebito = new javax.swing.JLabel();
         lbCnpj = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Grupo Floripark");
@@ -182,6 +198,13 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton1.setText("Imprimir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,6 +214,8 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(172, 172, 172)
                         .addComponent(btnSair))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -209,7 +234,9 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSair)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSair)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -220,8 +247,20 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            JasperReport jasperReport = JasperCompileManager.compileReport("/br/com/floripark/financeiro/report/Comprovante.jrxml");
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, new JRBeanCollectionDataSource(lista));
+            JasperExportManager.exportReportToPdfFile(jasperPrint,"/br/com/floripark/financeiro/report/Comprovante.jrxml");
+        } catch (JRException ex) {
+            Logger.getLogger(DemonstrativoComprovante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
