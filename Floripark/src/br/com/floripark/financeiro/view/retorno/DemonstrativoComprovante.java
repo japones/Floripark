@@ -6,7 +6,9 @@ import br.com.floripark.financeiro.model.Usuario;
 import br.com.floripark.financeiro.util.CalculaDigito;
 import br.com.floripark.financeiro.util.tablemodel.ComprovanteBoletoTableModel;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
@@ -249,9 +251,15 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            JasperReport jasperReport = JasperCompileManager.compileReport("/br/com/floripark/financeiro/report/Comprovante.jrxml");
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, new JRBeanCollectionDataSource(lista));
-            JasperExportManager.exportReportToPdfFile(jasperPrint,"/br/com/floripark/financeiro/report/Comprovante.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport("src/br/com/floripark/financeiro/report/Comprovante.jrxml");
+            
+            Map parametro = new HashMap();
+            parametro.put("DADOS", 161);
+            
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parametro);
+
+            JasperExportManager.exportReportToPdfFile(jasperPrint,"src/br/com/floripark/financeiro/report/Comprovante.pdf");
+            
         } catch (JRException ex) {
             Logger.getLogger(DemonstrativoComprovante.class.getName()).log(Level.SEVERE, null, ex);
         }
