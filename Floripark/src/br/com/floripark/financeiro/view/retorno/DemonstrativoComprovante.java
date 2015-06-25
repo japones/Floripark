@@ -17,7 +17,6 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class DemonstrativoComprovante extends javax.swing.JDialog {
 
@@ -251,14 +250,14 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            JasperReport jasperReport = JasperCompileManager.compileReport("src/br/com/floripark/financeiro/report/Comprovante.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport("src/br/com/floripark/financeiro/report/Relatorio.jrxml");
             
             Map parametro = new HashMap();
             parametro.put("DADOS", 161);
             
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parametro);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null);
 
-            JasperExportManager.exportReportToPdfFile(jasperPrint,"src/br/com/floripark/financeiro/report/Comprovante.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint,"src/br/com/floripark/financeiro/report/Relatorio.pdf");
             
         } catch (JRException ex) {
             Logger.getLogger(DemonstrativoComprovante.class.getName()).log(Level.SEVERE, null, ex);
