@@ -3,20 +3,24 @@ package br.com.floripark.financeiro.view.retorno;
 import br.com.floripark.financeiro.model.Dado;
 import br.com.floripark.financeiro.model.Empresa;
 import br.com.floripark.financeiro.model.Usuario;
+import br.com.floripark.financeiro.service.ServiceFactory;
 import br.com.floripark.financeiro.util.CalculaDigito;
 import br.com.floripark.financeiro.util.tablemodel.ComprovanteBoletoTableModel;
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.swing.JRViewer;
 
 public class DemonstrativoComprovante extends javax.swing.JDialog {
 
@@ -113,8 +117,10 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         lbCnpj.setText(cnpj);
         
         lista = new ArrayList(10);
-        for (int i = 0; i < comp.length; i++) {
-            lista.add(comp[1][i]);
+        for (int j = 0; j < 2; j++) {
+            for (int i = 0; i < comp.length; i++) {
+                lista.add(comp[j][i]);
+            }
         }
 
     }
@@ -250,14 +256,28 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            JasperReport jasperReport = JasperCompileManager.compileReport("src/br/com/floripark/financeiro/report/Relatorio.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport("src/br/com/floripark/financeiro/report/RelatorioDS.jrxml");
             
             Map parametro = new HashMap();
             parametro.put("DADOS", 161);
             
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null);
+            
+            JasperPrint jasperPrint = null;
+            try {
+                jasperPrint = JasperFillManager.fillReport(jasperReport,null, new JRBeanCollectionDataSource(ServiceFactory.getBancoService().pesquisarBanco()));
+            } catch (Exception ex) {
+                Logger.getLogger(DemonstrativoComprovante.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-            JasperExportManager.exportReportToPdfFile(jasperPrint,"src/br/com/floripark/financeiro/report/Relatorio.pdf");
+           // JasperExportManager.exportReportToPdfFile(jasperPrint,"src/br/com/floripark/financeiro/report/RelatorioDS.pdf");
+            
+            JRViewer viewer = new JRViewer(jasperPrint);
+            JFrame frame = new JFrame();
+            frame.add(viewer,BorderLayout.CENTER);
+            frame.setSize(500, 500);
+            frame.setExtendedState( JFrame.MAXIMIZED_BOTH );
+            frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+            frame.setVisible(true);
             
         } catch (JRException ex) {
             Logger.getLogger(DemonstrativoComprovante.class.getName()).log(Level.SEVERE, null, ex);
