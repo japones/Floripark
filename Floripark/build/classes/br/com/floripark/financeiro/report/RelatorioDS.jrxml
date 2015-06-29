@@ -6,11 +6,11 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="id" class="java.lang.Integer">
-		<fieldDescription><![CDATA[id]]></fieldDescription>
+	<field name="coluna0" class="java.lang.String">
+		<fieldDescription><![CDATA[coluna0]]></fieldDescription>
 	</field>
-	<field name="nome" class="java.lang.String">
-		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	<field name="coluna1" class="java.lang.String">
+		<fieldDescription><![CDATA[coluna1]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -24,28 +24,28 @@
 	<columnHeader>
 		<band height="26" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="4da427f5-11d1-4d5b-b469-e6b0afe952f4" x="0" y="0" width="100" height="20"/>
+				<reportElement uuid="db77b5ee-8686-477d-8f7d-d8128e55c3d8" x="0" y="0" width="148" height="20"/>
 				<textElement/>
-				<text><![CDATA[id]]></text>
+				<text><![CDATA[coluna0]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0d016eef-df28-44ea-bbd4-1f8851ddd545" x="100" y="0" width="276" height="20"/>
+				<reportElement uuid="d534fb16-2b62-499b-b833-f3d3a5ac3edc" x="148" y="0" width="330" height="20"/>
 				<textElement/>
-				<text><![CDATA[nome]]></text>
+				<text><![CDATA[coluna1]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement uuid="5f80aedb-5c1f-4dc4-b717-a68f46abb5ab" x="0" y="0" width="100" height="20"/>
+				<reportElement uuid="198f0833-72f4-42c7-88d7-1bc24fffb3cb" x="0" y="0" width="148" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{coluna0}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="6787de3c-470f-43af-996f-f5dc177788b5" x="100" y="0" width="276" height="20"/>
+				<reportElement uuid="302035a9-713c-48f7-8e4f-bf87c829e955" x="148" y="1" width="330" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{coluna1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

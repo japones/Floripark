@@ -115,14 +115,6 @@ public class DemonstrativoComprovante extends javax.swing.JDialog {
         lbAgenciaDebito.setText(agencia);
         lbContaDebito.setText(conta);
         lbCnpj.setText(cnpj);
-        
-        lista = new ArrayList(10);
-        for (int j = 0; j < 2; j++) {
-            for (int i = 0; i < comp.length; i++) {
-                lista.add(comp[j][i]);
-            }
-        }
-
     }
 
     @SuppressWarnings("unchecked")
